@@ -378,6 +378,11 @@
    * @param {Object} arrowLayer
    */
   function _placeTooltip(targetElement, tooltipLayer, arrowLayer, helperNumberLayer) {
+    var tooltipCssClass = '',
+        currentStepObj,
+        tooltipOffset,
+        targetElementOffset;
+
     //reset the old style
     tooltipLayer.style.top        = null;
     tooltipLayer.style.right      = null;
@@ -396,10 +401,8 @@
     //prevent error when `this._currentStep` is undefined
     if (!this._introItems[this._currentStep]) return;
 
-    var tooltipCssClass = '';
-
     //if we have a custom css class for each step
-    var currentStepObj = this._introItems[this._currentStep];
+    currentStepObj = this._introItems[this._currentStep];
     if (typeof (currentStepObj.tooltipClass) === 'string') {
       tooltipCssClass = currentStepObj.tooltipClass;
     } else {
@@ -411,7 +414,7 @@
     //custom css class for tooltip boxes
     var tooltipCssClass = this._options.tooltipClass;
 
-    var currentTooltipPosition = this._introItems[this._currentStep].position;
+    currentTooltipPosition = this._introItems[this._currentStep].position;
     switch (currentTooltipPosition) {
       case 'top':
         tooltipLayer.style.left = '15px';
@@ -433,7 +436,7 @@
         arrowLayer.style.display = 'none';
 
         //we have to adjust the top and left of layer manually for intro items without element{
-        var tooltipOffset = _getOffset(tooltipLayer);
+        tooltipOffset = _getOffset(tooltipLayer);
 
         tooltipLayer.style.left   = '50%';
         tooltipLayer.style.top    = '50%';
@@ -446,6 +449,21 @@
         }
 
         break;
+      case 'bottom-right-aligned':
+        arrowLayer.className = 'introjs-arrow top-right';
+        tooltipLayer.style.right = '0px';
+        tooltipLayer.style.bottom = '-' + (_getOffset(tooltipLayer).height + 10) + 'px';
+        break;
+      case 'bottom-middle-aligned':
+        targetElementOffset = _getOffset(targetElement);
+        tooltipOffset = _getOffset(tooltipLayer);
+
+        arrowLayer.className = 'introjs-arrow top-middle';
+        tooltipLayer.style.left = (targetElementOffset.width/2 - tooltipOffset.width/2) + 'px';
+        tooltipLayer.style.bottom = '-' + (tooltipOffset.height + 10) + 'px';
+        break;
+      case 'bottom-left-aligned':
+      // Bottom-left-aligned is the same as the default bottom
       case 'bottom':
       // Bottom going to follow the default behavior
       default:
@@ -467,10 +485,10 @@
       //prevent error when `this._currentStep` in undefined
       if (!this._introItems[this._currentStep]) return;
 
-      var currentElement  = this._introItems[this._currentStep];
-      var elementPosition = _getOffset(currentElement.element);
+      var currentElement  = this._introItems[this._currentStep],
+          elementPosition = _getOffset(currentElement.element),
+          widthHeightPadding = 10;
 
-      var widthHeightPadding = 10;
       if (currentElement.position == 'floating') {
         widthHeightPadding = 0;
       }
