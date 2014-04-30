@@ -48,10 +48,16 @@
           transition: all 0.3s ease-out;
 }
 
+.introjs-tooltipReferenceLayer {
+  position: absolute;
+  z-index: 10000000;
+  background-color: transparent;
+}
+
 .introjs-helperNumberLayer {
   position: absolute;
   top: -16px;
-  left: -16px;
+  left: 16px;
   z-index: 9999999999 !important;
   padding: 2px;
   font-family: Arial, verdana, tahoma;
@@ -97,6 +103,14 @@
   border-bottom-color:transparent;
   border-left-color:white;
 }
+.introjs-arrow.right-bottom {
+  bottom:10px;
+  right: -10px;
+  border-top-color:transparent;
+  border-right-color:transparent;
+  border-bottom-color:transparent;
+  border-left-color:white;
+}
 .introjs-arrow.bottom {
   bottom: -10px;
   border-top-color:white;
@@ -107,6 +121,14 @@
 .introjs-arrow.left {
   left: -10px;
   top: 10px;
+  border-top-color:transparent;
+  border-right-color:white;
+  border-bottom-color:transparent;
+  border-left-color:transparent;
+}
+.introjs-arrow.left-bottom {
+  left: -10px;
+  bottom:10px;
   border-top-color:transparent;
   border-right-color:white;
   border-bottom-color:transparent;
