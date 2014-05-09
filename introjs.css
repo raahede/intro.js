@@ -29,11 +29,15 @@
           transform: none !important;
 }
 
-.introjs-showElement {
+.introjs-showElement,
+tr.introjs-showElement > td,
+tr.introjs-showElement > th {
   z-index: 9999999 !important;
 }
 
-.introjs-relativePosition {
+.introjs-relativePosition,
+tr.introjs-showElement > td,
+tr.introjs-showElement > th {
   position: relative;
 }
 
